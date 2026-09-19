@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="ja" data-theme="paper">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#173d2a" />
+    <meta name="description" content="宮沢賢治『どんぐりと山猫』を、ルビ付きでオフラインでも読める読書アプリ。" />
+    <meta name="color-scheme" content="light dark" />
+    <link rel="manifest" href="manifest.webmanifest" />
+    <link rel="icon" href="icons/icon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="icons/icon-192.png" />
+    <link rel="stylesheet" href="styles.css" />
+    <title>どんぐりと山猫 — 宮沢賢治</title>
+  </head>
+  <body>
+    <a class="skip-link" href="#story">本文へ移動</a>
+    <div class="reading-progress" aria-hidden="true"><span id="progressBar"></span></div>
+
+    <header class="app-header">
+      <a class="brand" href="#top" aria-label="『どんぐりと山猫』の表紙へ">
+        <svg class="brand-mark" viewBox="0 0 48 48" aria-hidden="true">
+          <path d="M24 5c-8 1-14 8-14 17 0 11 7 20 14 20s14-9 14-20C38 13 32 6 24 5Z" />
+          <path d="M17 14c2-7 12-10 19-5-4 1-7 4-8 8-4-2-8-3-11-3Z" />
+        </svg>
+        <span>どんぐりと山猫</span>
+      </a>
+      <nav class="header-actions" aria-label="読書メニュー">
+        <button class="icon-button" id="installButton" type="button" hidden>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v11m0 0 4-4m-4 4-4-4M5 17v3h14v-3" /></svg>
+          <span>追加</span>
+        </button>
+        <button class="icon-button" id="settingsButton" type="button" aria-haspopup="dialog">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h10m4 0h2M4 17h2m4 0h10M14 4v6M6 14v6" /></svg>
+          <span>読み方</span>
+        </button>
+      </nav>
+    </header>
+
+    <main id="top">
+      <section class="cover" aria-labelledby="bookTitle">
+        <div class="cover-sky" aria-hidden="true"><span class="cloud-one"></span><span class="cloud-two"></span></div>
+        <div class="cover-copy">
+          <p class="eyebrow">宮沢賢治　童話</p>
+          <h1 id="bookTitle">どんぐりと<br />山猫</h1>
+          <p class="cover-lead">おかしなはがきに誘われて、<br />一郎は秋の山へ向かいます。</p>
+          <a class="start-reading" href="#story"><span>ものがたりを読む</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m8 10 4 4 4-4" /></svg></a>
+        </div>
+        <div class="cover-art" aria-hidden="true">
+          <svg viewBox="0 0 520 460" role="presentation">
+            <path class="mountain far" d="M-20 320 90 195l74 78 96-143 101 132 61-69 118 127v160H-20Z" />
+            <path class="mountain near" d="M-30 353 112 251l68 48 81-85 91 88 63-47 135 102v123H-30Z" />
+            <g class="cat"><path d="M286 196 319 155l18 48 58 12-18 43 7 99-94 2 4-104-23-38Z" /><path d="m309 219 11 9m35-4 11-4M331 239l8 3-7 5m-18 4 18 1m8-1 21-5" /><path d="M294 289c-34 18-50 50-47 92m135-91c43 21 45 61 28 91" /></g>
+            <g class="acorns"><g transform="translate(96 345) rotate(-18)"><path d="M0 8c0 28 13 47 29 47S58 36 58 8Z" /><path d="M-2 11C3-9 54-10 60 11Z" /></g><g transform="translate(169 369) rotate(13) scale(.72)"><path d="M0 8c0 28 13 47 29 47S58 36 58 8Z" /><path d="M-2 11C3-9 54-10 60 11Z" /></g><g transform="translate(400 353) rotate(20) scale(.82)"><path d="M0 8c0 28 13 47 29 47S58 36 58 8Z" /><path d="M-2 11C3-9 54-10 60 11Z" /></g></g>
+          </svg>
+        </div>
+        <p class="scroll-hint" aria-hidden="true">scroll</p>
+      </section>
+
+      <section class="reader-shell" id="story" aria-labelledby="storyHeading">
+        <div class="reader-heading">
+          <div><p class="eyebrow">一、山猫からのはがき</p><h2 id="storyHeading">どんぐりと山猫</h2></div>
+          <p id="progressLabel" class="progress-label" aria-live="polite">0% 読了</p>
+        </div>
+        <article class="story" id="storyText" tabindex="0" aria-busy="true"><p class="loading-text">山の道をひらいています……</p></article>
+      </section>
+
+      <section class="afterword" aria-labelledby="aboutHeading">
+        <p class="eyebrow">この作品について</p>
+        <h2 id="aboutHeading">秋の山でひらかれる、<br />ふしぎな裁判。</h2>
+        <p>1924（大正13）年刊行の童話集『注文の多い料理店』に収録された、宮沢賢治の童話です。本アプリは青空文庫の新字新仮名版を、読みやすい形で収録しています。</p>
+        <dl class="book-data">
+          <div><dt>著者</dt><dd>宮沢 賢治</dd></div>
+          <div><dt>底本</dt><dd>「注文の多い料理店」新潮文庫、新潮社</dd></div>
+          <div><dt>入力・校正</dt><dd>土屋隆・noriko saito</dd></div>
+        </dl>
+        <a class="source-link" href="https://www.aozora.gr.jp/cards/000081/card43752.html" target="_blank" rel="noreferrer">青空文庫の図書カードを見る <span aria-hidden="true">↗</span></a>
+      </section>
+    </main>
+
+    <footer><p>本文データ提供：青空文庫</p><p>入力、校正、制作に携わったボランティアのみなさんに感謝します。</p></footer>
+
+    <dialog class="settings-dialog" id="settingsDialog" aria-labelledby="settingsTitle">
+      <form method="dialog">
+        <div class="dialog-header"><div><p class="eyebrow">Reading settings</p><h2 id="settingsTitle">読み方を整える</h2></div><button class="close-button" value="close" aria-label="設定を閉じる" type="submit">×</button></div>
+        <fieldset><legend>背景</legend><div class="segmented-control" id="themeControl"><label><input type="radio" name="theme" value="paper" checked /><span>白紙</span></label><label><input type="radio" name="theme" value="sepia" /><span>生成り</span></label><label><input type="radio" name="theme" value="night" /><span>夜</span></label></div></fieldset>
+        <div class="setting-row"><label for="fontSize">文字の大きさ</label><output id="fontSizeValue" for="fontSize">18px</output></div>
+        <input id="fontSize" type="range" min="15" max="28" step="1" value="18" />
+        <div class="setting-row"><label for="lineHeight">行間</label><output id="lineHeightValue" for="lineHeight">1.9</output></div>
+        <input id="lineHeight" type="range" min="1.6" max="2.4" step="0.1" value="1.9" />
+        <div class="toggle-row"><span><strong>縦書き</strong><small>物語を右から左へ読みます</small></span><label class="switch"><input id="verticalWriting" type="checkbox" /><span aria-hidden="true"></span></label></div>
+        <div class="toggle-row"><span><strong>ルビを表示</strong><small>漢字の読みがなを表示します</small></span><label class="switch"><input id="showRuby" type="checkbox" checked /><span aria-hidden="true"></span></label></div>
+        <button class="reset-button" id="resetProgress" type="button">読書位置を最初に戻す</button>
+      </form>
+    </dialog>
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+    <script type="module" src="app.js"></script>
+  </body>
+</html>

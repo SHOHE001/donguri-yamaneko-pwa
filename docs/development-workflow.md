@@ -17,8 +17,7 @@ Issueにはタスクと経緯、PRには変更と検証、docsには確定した
 | Repository instructions | 設定済み | `AGENTS.md`, `CLAUDE.md` |
 | Issue templates | 設定済み | `.github/ISSUE_TEMPLATE/` |
 | Pull request template | 設定済み | `.github/pull_request_template.md` |
-| CI | 実装ブランチで追加予定 | アプリの実コマンド確定後に追加する |
+| CI | 設定済み | `.github/workflows/ci.yml` の `npm test`, `npm run check`。GitHub未同期のため実行結果は未確認 |
 | Branch protection | 未確認 | 対応するGitHubリポジトリが未作成 |
 | Development HQ | 未同期 | Issue/PR URLがなく登録対象がない |
 | Remote | 未設定 | 公開先と可視性を推測しないためローカルのみ |
-
