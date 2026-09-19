@@ -1,0 +1,35 @@
+name: Feature request
+description: 目的と受入条件を記録する。
+body:
+  - type: markdown
+    attributes:
+      value: 秘密情報・token・個人情報を貼らないでください。既存Issueを先に検索してください。
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem
+    validations:
+      required: true
+  - type: textarea
+    id: goal
+    attributes:
+      label: Goal
+    validations:
+      required: true
+  - type: textarea
+    id: behavior
+    attributes:
+      label: Proposed behavior
+    validations:
+      required: true
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: Acceptance criteria
+    validations:
+      required: true
+  - type: textarea
+    id: context
+    attributes:
+      label: Additional context
+

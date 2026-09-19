@@ -1,0 +1,48 @@
+name: Blocker
+description: 3回の意味ある試行が失敗した未解決問題を記録する。
+labels:
+  - blocked
+body:
+  - type: markdown
+    attributes:
+      value: 秘密情報・token・個人情報を貼らないでください。既存Issueを先に検索してください。
+  - type: textarea
+    id: goal
+    attributes:
+      label: Goal
+    validations:
+      required: true
+  - type: textarea
+    id: blocker
+    attributes:
+      label: Current blocker
+    validations:
+      required: true
+  - type: textarea
+    id: attempt1
+    attributes:
+      label: Attempt 1
+      description: Hypothesis / Change or verification / Result
+    validations:
+      required: true
+  - type: textarea
+    id: attempt2
+    attributes:
+      label: Attempt 2
+      description: Hypothesis / Change or verification / Result
+    validations:
+      required: true
+  - type: textarea
+    id: attempt3
+    attributes:
+      label: Attempt 3
+      description: Hypothesis / Change or verification / Result
+    validations:
+      required: true
+  - type: textarea
+    id: details
+    attributes:
+      label: Branch, commit, environment, reproduction, and next steps
+    validations:
+      required: true
+
