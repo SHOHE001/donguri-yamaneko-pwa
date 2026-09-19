@@ -17,8 +17,13 @@ Issueにはタスクと経緯、PRには変更と検証、docsには確定した
 | Repository instructions | 設定済み | `AGENTS.md`, `CLAUDE.md` |
 | Issue templates | 設定済み | `.github/ISSUE_TEMPLATE/` |
 | Pull request template | 設定済み | `.github/pull_request_template.md` |
-| CI | 実装ブランチで追加予定 | アプリの実コマンド確定後に追加する |
-| Branch protection | 未確認 | 対応するGitHubリポジトリが未作成 |
-| Development HQ | 未同期 | Issue/PR URLがなく登録対象がない |
-| Remote | 未設定 | 公開先と可視性を推測しないためローカルのみ |
+| CI | 設定済み | `.github/workflows/ci.yml` の必須チェック `verify` |
+| GitHub Pages | 設定済み | `.github/workflows/pages.yml`、main更新時に静的PWAを公開 |
+| Branch protection | 設定済み | mainはPR必須、`verify`必須、linear history、force push・削除禁止。2026-09-19 readback済み |
+| Development HQ | 同期済み | `SHOHE001` Project #1、Issue #1を登録 |
+| Remote | 設定済み | https://github.com/SHOHE001/donguri-yamaneko-pwa |
 
+## 公開先
+
+- GitHub Pages: https://shohe001.github.io/donguri-yamaneko-pwa/
+- 公開処理: mainへのmerge後、`Deploy GitHub Pages` workflowがテスト・静的検査・成果物作成・デプロイを行う。
