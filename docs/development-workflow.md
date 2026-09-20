@@ -10,16 +10,16 @@ Issueにはタスクと経緯、PRには変更と検証、docsには確定した
 
 ## 導入状況
 
-最終確認日: 2026-09-19
+最終確認日: 2026-09-21
 
 | 項目 | 状態 | 根拠・未対応理由 |
 | --- | --- | --- |
 | Repository instructions | 設定済み | `AGENTS.md`, `CLAUDE.md` |
 | Issue templates | 設定済み | `.github/ISSUE_TEMPLATE/` |
 | Pull request template | 設定済み | `.github/pull_request_template.md` |
-| CI | 設定済み | `.github/workflows/ci.yml` の必須チェック `verify` |
+| CI | 設定済み | `.github/workflows/ci.yml` の必須チェック `verify`（Nodeテスト・静的検証・Chromiumのスマホ幅/PC幅で読書位置とオフラインを検証） |
 | GitHub Pages | 設定済み | `.github/workflows/pages.yml`、main更新時に静的PWAを公開 |
-| Branch protection | 設定済み | mainはPR必須、`verify`必須、linear history、force push・削除禁止。2026-09-19 readback済み |
+| Branch protection | 一部設定済み | 2026-09-21 readback: mainは最新baseと`verify`必須、linear history、会話解決必須、管理者にも適用、force push・削除禁止。PR必須のAPI設定は存在せず、PR経由は運用ルール。保護設定の補完は未実施 |
 | Development HQ | 同期済み | `SHOHE001` Project #1、Issue #1を登録 |
 | Remote | 設定済み | https://github.com/SHOHE001/donguri-yamaneko-pwa |
 

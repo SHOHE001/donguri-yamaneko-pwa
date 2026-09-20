@@ -16,6 +16,9 @@ let preferences = loadPreferences();
 let deferredInstallPrompt;
 let saveTimer;
 let toastTimer;
+let storyReady = false;
+let restoreFrame;
+let storageWarningShown = false;
 
 function loadPreferences() {
   try {
@@ -26,7 +29,15 @@ function loadPreferences() {
 }
 
 function savePreferences() {
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(preferences));
+  clearTimeout(saveTimer);
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(preferences));
+  } catch {
+    if (!storageWarningShown) {
+      storageWarningShown = true;
+      announce("このブラウザでは読書位置と設定を保存できません");
+    }
+  }
 }
 
 function queueSave() {
@@ -40,7 +51,9 @@ function setThemeColour(theme) {
 }
 
 function applyPreferences({ preservePosition = true } = {}) {
-  const currentProgress = preservePosition ? getProgress() : preferences.progress;
+  const currentProgress = preservePosition && storyReady && !restoreFrame ? getProgress() : preferences.progress;
+  preferences.progress = currentProgress;
+  cancelAnimationFrame(restoreFrame);
   root.dataset.theme = preferences.theme;
   root.style.setProperty("--reader-size", `${preferences.fontSize}px`);
   root.style.setProperty("--reader-leading", preferences.lineHeight);
@@ -56,7 +69,13 @@ function applyPreferences({ preservePosition = true } = {}) {
   document.querySelector("#fontSizeValue").value = `${preferences.fontSize}px`;
   document.querySelector("#lineHeightValue").value = preferences.lineHeight.toFixed(1);
 
-  requestAnimationFrame(() => restoreProgress(currentProgress));
+  if (storyReady) {
+    restoreFrame = requestAnimationFrame(() => {
+      restoreProgress(currentProgress);
+      restoreFrame = undefined;
+    });
+  }
+  queueSave();
 }
 
 function verticalExtent() {
@@ -68,7 +87,8 @@ function pageExtent() {
 }
 
 function getProgress() {
-  if (preferences.vertical) {
+  // Preferences may already contain the new direction; measure the current layout.
+  if (story.classList.contains("is-vertical")) {
     return readingPercentage(Math.abs(story.scrollLeft), verticalExtent());
   }
   const storyTop = story.getBoundingClientRect().top + window.scrollY;
@@ -79,6 +99,11 @@ function restoreProgress(progress) {
   const safeProgress = Math.max(0, Math.min(1, progress || 0));
   if (preferences.vertical) {
     story.scrollLeft = -verticalExtent() * safeProgress;
+    if (safeProgress > 0) {
+      const storyTop = story.getBoundingClientRect().top + window.scrollY;
+      const headerHeight = document.querySelector(".app-header").getBoundingClientRect().height;
+      window.scrollTo({ top: storyTop - headerHeight - 16, behavior: "instant" });
+    }
   } else if (safeProgress > 0) {
     const storyTop = story.getBoundingClientRect().top + window.scrollY;
     window.scrollTo({ top: storyTop + pageExtent() * safeProgress, behavior: "instant" });
@@ -106,6 +131,7 @@ async function loadStory() {
     const response = await fetch("content/donguri-yamaneko.html");
     if (!response.ok) throw new Error(`HTTP ${response.status}`);
     story.innerHTML = await response.text();
+    storyReady = true;
     story.setAttribute("aria-busy", "false");
     applyPreferences({ preservePosition: false });
   } catch {
@@ -152,12 +178,17 @@ document.querySelector("#resetProgress").addEventListener("click", () => {
 });
 
 window.addEventListener("scroll", () => {
-  if (!preferences.vertical) updateProgress();
+  if (storyReady && !restoreFrame && !preferences.vertical) updateProgress();
 }, { passive: true });
 
 story.addEventListener("scroll", () => {
-  if (preferences.vertical) updateProgress();
+  if (storyReady && !restoreFrame && preferences.vertical) updateProgress();
 }, { passive: true });
+
+window.addEventListener("pagehide", savePreferences);
+document.addEventListener("visibilitychange", () => {
+  if (document.visibilityState === "hidden") savePreferences();
+});
 
 window.addEventListener("beforeinstallprompt", (event) => {
   event.preventDefault();
