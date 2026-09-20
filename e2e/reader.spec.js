@@ -24,7 +24,7 @@ test("changing writing direction keeps the reading position and text visible", a
   await expect(page.locator("#progressLabel")).toHaveText("50% 読了");
   await page.locator(".close-button").click();
   await expect(page.locator("#storyText")).toBeInViewport();
-  await page.waitForFunction((key) => JSON.parse(localStorage.getItem(key)).vertical, storageKey);
+  await page.waitForFunction((key) => JSON.parse(localStorage.getItem(key))?.vertical, storageKey);
   await page.reload();
   await ready(page);
   await expect(page.locator("#progressLabel")).toHaveText("50% 読了");
