@@ -30,8 +30,11 @@ python3 -m http.server 4173
 ## 検証
 
 ```sh
+npm ci
+npx playwright install chromium
 npm test
 npm run check
+npm run test:browser
 ```
 
 ## 本文について

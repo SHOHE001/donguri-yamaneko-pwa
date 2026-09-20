@@ -15,6 +15,7 @@ Run the checks that exist for the current branch:
 ```sh
 npm test
 npm run check
+npm run test:browser
 ```
 
 For a manual PWA check, serve the repository over HTTP and verify installability, offline reload, reading preferences, and progress restoration.
